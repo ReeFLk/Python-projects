@@ -1,6 +1,8 @@
-from tkinter import *
 import csv
-import time
+from functools import partial
+from re import I
+import pygame
+import sys
 
 
 def extractionDonnees(nomFichier, separateur):
@@ -96,8 +98,8 @@ def qcm():
     for i in range(len(sentences)):
         reponses.append(sentences[i].pop().split(";;"))
 
-    print(sentences)
-    print(reponses)
+    """print(sentences)
+    print(reponses)"""
 
 
 def input_qcm():
@@ -106,33 +108,38 @@ def input_qcm():
         input(reponses[0][0] + "\n")
 
 
-def enter_clic():
-    input_reponses.append(entry_reponse.get())
-    print(input_reponses)
-
-
+pygame.init()
+wd = pygame.display.set_mode((1080, 600))
+pygame.display.set_caption("Choipeau")
+choipeau = pygame.image.load("choixpeau\sortinghat.png")
+pygame.display.set_icon(choipeau)
+input_text = ""
+clock = pygame.time.Clock()
+fantastic_font = pygame.font.Font("choixpeau/HARRYP__.TTF", 24)
+base_font = pygame.font.Font(None, 24)
 input_reponses = []
+qcm()
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_BACKSPACE:
+                input_text = input_text[:-1]
+            else:
+                input_text += event.unicode
+    wd.fill((0, 0, 0))
+    input_surface = fantastic_font.render(input_text, False, (255, 255, 255))
+    question_surface = fantastic_font.render(
+        sentences[0][0].upper() + "?", False, (255, 255, 255))
+    wd.blit(question_surface, (0, 0))
+    wd.blit(input_surface, (0, 50))
+    pygame.display.update()
+    clock.tick(30)
+
+
 choix_final = frequence_des_maisons(knn_new_student(characteristiques_rangement(), {
                                     'Name': 'Draco Malfoy', 'Courage': '2', 'Ambition': '9', 'Intelligence': '8', 'Good': '4'}))
-print(choix_final)
-print(qcm())
-
-waiting_bool = True
-
-mainapp = Tk()
-for i, question in enumerate(sentences):
-    waiting_bool = True
-    question_text = Label(mainapp, text=question[0]+"?").pack()
-    entry_reponse = Entry(mainapp)
-    entry_reponse.pack()
-
-    enter_button = Button(mainapp, text="Enter", command=enter_clic)
-    enter_button.pack()
-
-    mainapp.mainloop()
-
-    while (waiting_bool):
-        time.sleep(1)
-        if input_reponses[i]  # if exist alors waiting bool = False
-
-mainapp.mainloop()
