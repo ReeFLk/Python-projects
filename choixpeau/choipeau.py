@@ -1,6 +1,7 @@
 import csv
 from functools import partial
 from re import I
+from turtle import width
 import pygame
 import sys
 
@@ -98,27 +99,52 @@ def qcm():
     for i in range(len(sentences)):
         reponses.append(sentences[i].pop().split(";;"))
 
-    """print(sentences)
-    print(reponses)"""
+
+def create_tab_reponses():
+    global tab_reponses
+    tab_reponses = []
+    for reponse in reponses:
+        tab_reponses.append(reponse[1])
+    print(tab_reponses)
 
 
-def input_qcm():
-    for i, question in enumerate(sentences):
-        print(question[0] + " ?")
-        input(reponses[0][0] + "\n")
+def verification():
+    global score
+    if input_reponses[index_questions] == tab_reponses[index_questions]:
+        score+=1
+
+WIDTH = 1080
+HEIGHT = 600
+
+score = 0
+input_reponses = []
+qcm()
+create_tab_reponses()
 
 
 pygame.init()
-wd = pygame.display.set_mode((1080, 600))
+
+wd = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Choipeau")
 choipeau = pygame.image.load("choixpeau\sortinghat.png")
 pygame.display.set_icon(choipeau)
-input_text = ""
 clock = pygame.time.Clock()
+
+input_text = ""
+index_questions = 0
+
 fantastic_font = pygame.font.Font("choixpeau/HARRYP__.TTF", 24)
 base_font = pygame.font.Font(None, 24)
-input_reponses = []
-qcm()
+
+input_surface = fantastic_font.render(input_text, False, (255, 255, 255))
+question_surface = fantastic_font.render(
+    sentences[index_questions][0].upper() + "?", False, (255, 255, 255))
+reponse_surface = fantastic_font.render(
+    reponses[0][index_questions], False, (255, 255, 255))
+question_rect = question_surface.get_rect(center=(WIDTH//2, 10))
+reponse_rect = reponse_surface.get_rect(center=(WIDTH//2, 40))
+input_text_rect = input_surface.get_rect(center=(WIDTH//2, 70))
+
 
 while True:
     for event in pygame.event.get():
@@ -129,14 +155,27 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
                 input_text = input_text[:-1]
+            elif event.key == pygame.K_RETURN:
+                input_reponses.append(input_text)
+                verification()
+                index_questions += 1
+                input_text = ""
+                print(input_reponses , score )
+                
             else:
-                input_text += event.unicode
+                input_text += event.unicode.upper()
+
     wd.fill((0, 0, 0))
     input_surface = fantastic_font.render(input_text, False, (255, 255, 255))
     question_surface = fantastic_font.render(
-        sentences[0][0].upper() + "?", False, (255, 255, 255))
-    wd.blit(question_surface, (0, 0))
-    wd.blit(input_surface, (0, 50))
+        sentences[index_questions][0].upper() + "?", False, (255, 255, 255))
+    reponse_surface = fantastic_font.render(
+        reponses[index_questions][0], False, (255, 255, 255))
+    question_rect = question_surface.get_rect(center=(WIDTH//2, 10))
+    reponse_rect = reponse_surface.get_rect(center=(WIDTH//2, 40))
+    wd.blit(question_surface, question_rect)
+    wd.blit(reponse_surface, reponse_rect)
+    wd.blit(input_surface, input_text_rect)
     pygame.display.update()
     clock.tick(30)
 
