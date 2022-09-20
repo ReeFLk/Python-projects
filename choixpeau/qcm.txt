@@ -1,10 +1,10 @@
 Qui est le chef du nouveau gouvernement en France en 1936 ? A-Thorez B-Blum C-Daladier D-Petain;;B
-Quel est le slogan du Front populaire ? A-" Avec la France, pour les Francais " B-" liberte, egalite, fraternite " C-" travail, famille, patrie " D-" le pain, la paix, la liberte ";;D
+Quel est le slogan du Front populaire ? A-"Avec la France, pour les Francais" B- "liberte, egalite, fraternite" C- "travail, famille, patrie" D- "le pain, la paix, la liberte";;D
 Quel parti ne compose pas le Front populaire ? A-Le Parti Radical B-La SFIO C-Le Bloc national D-Le Parti Communiste;;C
-Quel ev"nement de 1934 contribua à la creation du Front populaire ? A-Le congr"s de Tours B-Les emeutes des ligues C-Le Krach de Wall-Street D-La demission de Clemenceau;;B
-Quel evenement est à l'origine de la crise des annees 30 ? A-La revolution Russe B-La montee du fascisme C-La premi"re guerre mondiale D-Le Krach de Wall-Street;;D
-Lequel de ces pays est une île ? A-France B-Pays-Bas C-Australie D-Coree;;C
+Quel evenement de 1934 contribua a la creation du Front populaire ? A-Le congres de Tours B-Les emeutes des ligues C-Le Krach de Wall-Street D-La demission de Clemenceau;;B
+Quel evenement est a l'origine de la crise des annees 30 ? A-La revolution Russe B-La montee du fascisme C-La premiere guerre mondiale D-Le Krach de Wall-Street;;D
+Lequel de ces pays est une ile ? A-France B-Pays-Bas C-Australie D-Coree;;C
 Quelle est la couleur du cheval blanc d'Henri ? 4 A-Vert B-Rouge C-Gris D-Blanc;;D
-Un octet correspond à ? A-1bit B-4 bits C-8 bits D-32 bits;;C
+Un octet correspond a ? A-1bit B-4 bits C-8 bits D-32 bits;;C
 Avec 1 octet on peut coder ? A-255 valeurs B-8 valeurs C-16 valeurs D-256 valeurs;;D
-Qu'est ce que Microsoft Windows ? A-Un type d'ordinateur B-Un syst"me d'exploitation C-Un syst"me de gestion de bases de donnees;;B
+Qu'est ce que Microsoft Windows ? A-Un type d'ordinateur B-Un systeme d'exploitation C-Un systeme de gestion de bases de donnees;;B
