@@ -70,18 +70,18 @@ def create_tab_reponses_qcm():
 
 def verification():
     global score
-    if input_reponses_qcm[index_questions] == tab_reponses_qcm[index_questions]:
+    if input_reponses[index_questions] == tab_reponses_qcm[index_questions]:
         score += 1
 
 
 def window_intelligence():
     input_surface = fantastic_font.render(input_text, False, (255, 255, 255))
     question_surface = fantastic_font.render(
-        sentences_qcm[index_questions][0].upper() + "?", False, (255, 255, 255))
+        sentences_qcm_poudlard[index_questions][0].upper() + "?", False, (255, 255, 255))
     reponse_surface = fantastic_font.render(
-        reponses_qcm[index_questions][0], False, (255, 255, 255))
-    question_rect = question_surface.get_rect(center=(WIDTH//2, 10))
-    reponse_rect = reponse_surface.get_rect(center=(WIDTH//2, 40))
+        sentences_qcm_poudlard[index_questions][1], False, (255, 255, 255))
+    question_rect = question_surface.get_rect(center=(WIDTH//2, 15))
+    reponse_rect = reponse_surface.get_rect(center=(WIDTH//2, 45))
     wd.blit(question_surface, question_rect)
     wd.blit(reponse_surface, reponse_rect)
     wd.blit(input_surface, input_text_rect)
@@ -92,19 +92,47 @@ def qcm_poudlard():
     sentences_qcm_poudlard = []
     with open("choixpeau/question_poudlard.txt", 'r', newline='', encoding='utf-8-sig') as txtfile:
         for ligne in txtfile:
-            ligne = ligne.replace("\r", "").replace("\n","")
+            ligne = ligne.replace("\r", "").replace("\n", "")
             sentences_qcm_poudlard.append(ligne.split(" ? "))
-    print(sentences_qcm_poudlard)
 
+
+def houses(tab):
+    houses={}
+    for e in tab:
+        match e:
+            case "A":
+                if houses.get("Griffondor") is None:
+                    houses["Griffondor"]=1
+                houses["Griffondor"]+=1
+            case "B":
+                if houses.get("Serpentard")is None:
+                    houses["Serpentard"]=1
+                houses["Serpentard"]+=1
+            case "C":
+                if houses.get("Pouffessoufle")is None:
+                    houses["Pouffessoufle"]=1
+                houses["Pouffessoufle"]+=1
+            case "D":
+                if houses.get("Serdaigle")is None:
+                    houses["Serdaigle"]=1
+                houses["Serdaigle"]+=1
+    return list(houses.items())
+    
+
+def window_houses():
+    fantastic_font = pygame.font.Font("choixpeau/HARRYP__.TTF", 120)
+    annonce_surface = fantastic_font.render(
+        house[0][0], False, (255, 255, 255))
+    annonce_rect = question_surface.get_rect(center=(WIDTH//2, HEIGHT//2))
+    wd.blit(annonce_surface, annonce_rect)
 
 WIDTH = 1080
 HEIGHT = 600
 
 score = 0
-input_reponses_qcm = []
+input_reponses = []
 qcm_intelligence()
 qcm_poudlard()
-create_tab_reponses_qcm()
 
 
 pygame.init()
@@ -123,9 +151,9 @@ base_font = pygame.font.Font(None, 24)
 
 input_surface = fantastic_font.render(input_text, False, (255, 255, 255))
 question_surface = fantastic_font.render(
-    sentences_qcm[index_questions][0].upper() + "?", False, (255, 255, 255))
+    sentences_qcm_poudlard[index_questions][0].upper() + "?", False, (255, 255, 255))
 reponse_surface = fantastic_font.render(
-    reponses_qcm[0][index_questions], False, (255, 255, 255))
+    sentences_qcm_poudlard[index_questions][1], False, (255, 255, 255))
 question_rect = question_surface.get_rect(center=(WIDTH//2, 10))
 reponse_rect = reponse_surface.get_rect(center=(WIDTH//2, 40))
 input_text_rect = input_surface.get_rect(center=(WIDTH//2, 70))
@@ -141,20 +169,21 @@ while True:
             if event.key == pygame.K_BACKSPACE:
                 input_text = input_text[:-1]
             elif event.key == pygame.K_RETURN:
-                input_reponses_qcm.append(input_text)
-                verification()
-                if index_questions >= 9:
+                input_reponses.append(input_text)
+                # verification()
+                if index_questions >= 25:
                     break
                     index_questions = 0
                 index_questions += 1
                 input_text = ""
-                print(input_reponses_qcm, score)
-
             else:
                 input_text += event.unicode.upper()
 
     wd.fill((0, 0, 0))
-    if index_questions < 9:
+    if index_questions < 25:
         window_intelligence()
+    else:
+        house=houses(input_reponses)
+        window_houses()
     pygame.display.update()
     clock.tick(30)
