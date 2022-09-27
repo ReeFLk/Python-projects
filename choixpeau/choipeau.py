@@ -131,7 +131,6 @@ HEIGHT = 600
 
 score = 0
 input_reponses = []
-qcm_intelligence()
 qcm_poudlard()
 
 
@@ -139,7 +138,7 @@ pygame.init()
 
 wd = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Choipeau")
-choipeau = pygame.image.load("choixpeau\sortinghat.png")
+choipeau = pygame.image.load("choixpeau/sortinghat.png")
 pygame.display.set_icon(choipeau)
 clock = pygame.time.Clock()
 
