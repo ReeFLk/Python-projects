@@ -6,12 +6,12 @@ from level import Level
 def main():
     pygame.init()
 
-    SIZE = width, height = 1280, 720
+    SIZE = width, height = 480, 360
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode(SIZE, pygame.RESIZABLE)
     pygame.display.set_caption("Platformer")
-    bg_imgs = [pygame.image.load('background/background_layer_1.png'), pygame.image.load(
-        'background/background_layer_2.png'), pygame.image.load('background/background_layer_3.png')]
+    bg_imgs = [pygame.image.load('background/background_layer_1.png').convert_alpha(), pygame.image.load(
+        'background/background_layer_2.png').convert_alpha(), pygame.image.load('background/background_layer_3.png').convert_alpha()]
 
     level = Level(screen)
 
@@ -32,7 +32,7 @@ def main():
         level.run()
         pygame.display.update()
         print(clock.get_fps())
-        clock.tick(30)
+        clock.tick(60)
 
 
 main()
