@@ -59,6 +59,7 @@ class Level:
         player.apply_gravity()
         for sprite in self.tiles_group.sprites():
             if sprite.rect.colliderect(player.rect):
+                
                 if player.direction.y > 0:
                     player.rect.bottom = sprite.rect.top
                     player.direction.y = 0
